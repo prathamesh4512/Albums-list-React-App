@@ -125,7 +125,7 @@ const Home = () => {
             <div className="album-detail" key={`album-${index}`}>
               {processing && deleteId === album.id ? (
                 <span className="album-title-delete">deleting.....</span>
-              ) : edit && editIndex === album.id ? (
+              ) : edit && editId === album.id ? (
                 <input
                   type="text"
                   value={albumTitle}
