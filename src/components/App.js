@@ -8,6 +8,7 @@ function App() {
       <div className="header">
         <h2>Albums List</h2>
       </div>
+      {/* Home Page  */}
       <Home />
     </div>
   );
