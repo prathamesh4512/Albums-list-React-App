@@ -8,10 +8,10 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [albums, setAlbums] = useState([]);
   const [edit, setEdit] = useState(false);
-  const [editIndex, setEditIndex] = useState(-1);
+  const [editId, setEditId] = useState(-1);
   const [albumTitle, setAlbumTitle] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [deleteIndex, setDeleteIndex] = useState(-1);
+  const [deleteId, setDeleteId] = useState(-1);
 
   // Fetching albums from api on mount
   useEffect(() => {
@@ -28,19 +28,19 @@ const Home = () => {
   //clicking on pencil
   const editAlbum = (id, index) => {
     // if we click on same album pencil twice
-    if (edit && editIndex === id) {
+    if (edit && editId === id) {
       return setEdit(false);
       // if we had previously clicked on a album pencil & now clicked on
       // another album pencil
     } else if (edit) {
-      setEditIndex(id);
+      setEditId(id);
       return setAlbumTitle(albums[index].title);
     }
 
     // if we are clicking on pencil for 1st time OR
     // no pencil buttom is active
     setEdit(true);
-    setEditIndex(id);
+    setEditId(id);
     setAlbumTitle(albums[index].title);
   };
 
@@ -64,7 +64,7 @@ const Home = () => {
   const deleteAlbumState = async (id) => {
     setProcessing(true);
     // for showing deleting.... on UI for the deleting album
-    setDeleteIndex(id);
+    setDeleteId(id);
     const response = await deleteAlbum(id);
     if (response.success) {
       const newAlbums = albums.filter((album) => album.id !== id);
@@ -75,7 +75,7 @@ const Home = () => {
       console.log(response);
     }
     setProcessing(false);
-    setDeleteIndex(-1);
+    setDeleteId(-1);
   };
 
   const addAlbum = async () => {
@@ -123,7 +123,7 @@ const Home = () => {
         <div className="albums">
           {albums.map((album, index) => (
             <div className="album-detail" key={`album-${index}`}>
-              {processing && deleteIndex === album.id ? (
+              {processing && deleteId === album.id ? (
                 <span className="album-title-delete">deleting.....</span>
               ) : edit && editIndex === album.id ? (
                 <input
