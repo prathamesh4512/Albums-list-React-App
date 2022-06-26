@@ -5,7 +5,9 @@ import { Home } from "../pages";
 function App() {
   return (
     <div className="App">
-      <h2>Albums List</h2>
+      <div className="header">
+        <h2>Albums List</h2>
+      </div>
       <Home />
     </div>
   );

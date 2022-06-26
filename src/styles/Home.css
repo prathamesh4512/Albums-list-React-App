@@ -3,6 +3,50 @@
   /* flex-wrap: wrap; */
   /* flex: 1; */
   /* grid-template-columns: 1fr 1fr; */
+  margin-top: 70px;
+}
+
+.create-album {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  width: 70%;
+  margin: 15px;
+}
+
+.create-album textarea {
+  /* margin: auto; */
+  height: 90px;
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  background-color: #ebc0c0;
+  border: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 25px;
+  /* line-height: 22px; */
+  color: #424242;
+  display: block;
+  box-sizing: border-box;
+}
+
+.create-album textarea:focus {
+  outline: none;
+  border: 2px solid #d96c6c;
+}
+
+.create-album button {
+  position: absolute;
+  width: 112px;
+  height: 42px;
+  right: 0px;
+  bottom: -50px;
+  background: #8ae52e;
+  border-radius: 3px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }
 
 .album-detail {

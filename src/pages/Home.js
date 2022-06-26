@@ -22,9 +22,16 @@ const Home = () => {
     fetchAlbums();
   }, []);
 
-  const editAlbum = (index) => {
-    setEdit(!edit);
-    setEditIndex(index);
+  const editAlbum = (id, index) => {
+    if (edit && editIndex === id) {
+      return setEdit(false);
+    } else if (edit) {
+      setEditIndex(id);
+      return setAlbumTitle(albums[index].title);
+    }
+
+    setEdit(true);
+    setEditIndex(id);
     setAlbumTitle(albums[index].title);
   };
 
@@ -34,7 +41,7 @@ const Home = () => {
       const newAlbum = e.target.value;
       const response = await updateAlbum(newAlbum, id);
       if (response.success) {
-        albums[index].title = newAlbum;
+        albums.find((album) => album.id === id).title = newAlbum;
         setEdit(false);
       } else {
         toast.error("Error while updating Album");
@@ -46,7 +53,7 @@ const Home = () => {
 
   const deleteAlbumState = async (id, index) => {
     setProcessing(true);
-    setDeleteIndex(index);
+    setDeleteIndex(id);
     const response = await deleteAlbum(id);
     if (response.success) {
       const newAlbums = albums.filter((album) => album.id !== id);
@@ -62,11 +69,30 @@ const Home = () => {
     setDeleteIndex(-1);
   };
 
+  const addAlbum = async () => {
+    if (!newAlbum) return toast.error("Cant add empty Album");
+    // let id = albums.length + 1;;
+    const newAlbumObj = {
+      userId: 11,
+      // id:id,
+      id: 100,
+      title: newAlbum,
+    };
+    const response = await createAlbum(newAlbumObj);
+    if (response.success) {
+      setNewAlbum("");
+      const newAlbums = [newAlbumObj, ...albums];
+      setAlbums(newAlbums);
+      toast.success("New Album added Successfully");
+    } else {
+      console.log(response);
+    }
+  };
+
   return (
     <>
       <div className="create-album">
-        <input
-          type="text"
+        <textarea
           placeholder="Create New Album..."
           value={newAlbum}
           onChange={(e) => setNewAlbum(e.target.value)}
@@ -78,7 +104,9 @@ const Home = () => {
         {albums.map((album, index) => (
           // <div className="album">
           <div className="album-detail" key={`album-${index}`}>
-            {edit && editIndex === index ? (
+            {processing && deleteIndex === album.id ? (
+              <span className="album-title-delete">deleting.....</span>
+            ) : edit && editIndex === album.id ? (
               <input
                 type="text"
                 value={albumTitle}
@@ -87,10 +115,13 @@ const Home = () => {
                   updateAlbumState(e, album.id, index);
                 }}
               />
-            ) : processing && deleteIndex === index ? (
-              <span className="album-title-delete">deleting.....</span>
             ) : (
-              <span className="album-title">{album.title}</span>
+              <span
+                className="album-title"
+                onClick={() => editAlbum(album.id, index)}
+              >
+                {album.title}
+              </span>
             )}
             <div className="album-action">
               {/* <img
@@ -104,7 +135,7 @@ const Home = () => {
             /> */}
               <i
                 className="fa-solid fa-pencil"
-                onClick={() => editAlbum(index)}
+                onClick={() => editAlbum(album.id, index)}
               ></i>
               <i
                 className="fa-solid fa-trash-can"
