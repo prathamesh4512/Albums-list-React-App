@@ -1,3 +1,28 @@
+.loader {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #d6d6d6;
+  border-radius: 50%;
+  border-top-color: #6200ee;
+  animation: spin 1s linear infinite;
+  -webkit-animation: spin 1s linear infinite;
+  margin-right: 10px;
+  position: absolute;
+  top: 57%;
+  left: 50%;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
 .albums {
   /* display: grid; */
   /* flex-wrap: wrap; */
@@ -11,7 +36,7 @@
   margin-top: 40px;
   margin-bottom: 100px;
   width: 70%;
-  margin: 15px;
+  margin: 20px;
 }
 
 .create-album textarea {

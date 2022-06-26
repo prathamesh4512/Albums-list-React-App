@@ -12,9 +12,15 @@ root.render(
       position="top-right"
       toastOptions={{
         duration: 3000,
-        style: {
-          background: "#363636",
-          color: "#fff",
+        success: {
+          style: {
+            background: "lightgreen",
+          },
+        },
+        error: {
+          style: {
+            background: "crimson",
+          },
         },
       }}
     />

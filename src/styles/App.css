@@ -7,4 +7,5 @@
 h2 {
   font-family: Arial, Helvetica, sans-serif;
   color: #720dbb;
+  text-decoration: 3px double underline;
 }

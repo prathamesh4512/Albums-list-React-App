@@ -17,7 +17,7 @@ const customFetch = async (url, { body, ...customConfig }) => {
   try {
     const response = await fetch(url, config);
     const data = await response.json();
-    console.log("Fetched Data", data);
+    // console.log("Fetched Data", data);
     return {
       success: true,
       data: data,
@@ -30,12 +30,14 @@ const customFetch = async (url, { body, ...customConfig }) => {
   }
 };
 
+// fn to fetch albums from api
 export const getAlbums = () => {
   return customFetch(ROOT_URL, {
     method: "GET",
   });
 };
 
+// fn to create new album
 export const createAlbum = (album) => {
   return customFetch(ROOT_URL, {
     method: "POST",
@@ -43,6 +45,7 @@ export const createAlbum = (album) => {
   });
 };
 
+// fn to update album
 export const updateAlbum = (album, id) => {
   return customFetch(`${ROOT_URL}/${id}`, {
     method: "PUT",
@@ -50,6 +53,7 @@ export const updateAlbum = (album, id) => {
   });
 };
 
+// fn to delete album
 export const deleteAlbum = (id) => {
   return customFetch(`${ROOT_URL}/${id}`, {
     method: "DELETE",
