@@ -1,0 +1,64 @@
+.albums {
+  /* display: grid; */
+  /* flex-wrap: wrap; */
+  /* flex: 1; */
+  /* grid-template-columns: 1fr 1fr; */
+}
+
+.album-detail {
+  padding: 15px;
+  /* font-style: normal; */
+  /* font-weight: normal; */
+  font-size: 25px;
+  /* line-height: 22px; */
+  color: #424242;
+  margin: 15px;
+  background-color: #ebc0c0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.album-detail input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #424242;
+  font-size: 25px;
+  /* line-height: 22px; */
+  color: #424242;
+  width: 80%;
+}
+
+.album-detail input:focus {
+  outline: none;
+}
+
+/* .album-title {
+  display: inline-block;
+  width: 80%;
+} */
+
+/* .album-action {
+  width: 20%;
+  display: inline-block;
+} */
+
+.album-detail i {
+  height: 20px;
+  width: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  color: black;
+}
+
+.fa-pencil:hover {
+  color: green;
+}
+
+.fa-trash-can:hover {
+  color: red;
+}
+
+.album-title-delete {
+  color: red;
+}
