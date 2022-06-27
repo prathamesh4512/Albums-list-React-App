@@ -9,9 +9,9 @@ const Home = () => {
   const [albums, setAlbums] = useState([]);
   const [edit, setEdit] = useState(false);
   const [editId, setEditId] = useState(-1);
+  const [deleteId, setDeleteId] = useState(-1);
   const [albumTitle, setAlbumTitle] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [deleteId, setDeleteId] = useState(-1);
 
   // Fetching albums from api on mount
   useEffect(() => {
@@ -44,7 +44,7 @@ const Home = () => {
     setAlbumTitle(albums[index].title);
   };
 
-  const updateAlbumState = async (e, id, index) => {
+  const updateAlbumState = async (e, id) => {
     // if user clicked enter twice then !processing will be false
     if (e.key === "Enter" && !processing) {
       setProcessing(true);
@@ -122,7 +122,7 @@ const Home = () => {
       ) : (
         <div className="albums">
           {albums.map((album, index) => (
-            <div className="album-detail" key={`album-${index}`}>
+            <div className="album-detail" key={`album-${album.id}`}>
               {processing && deleteId === album.id ? (
                 <span className="album-title-delete">deleting.....</span>
               ) : edit && editId === album.id ? (
@@ -131,7 +131,7 @@ const Home = () => {
                   value={albumTitle}
                   onChange={(e) => setAlbumTitle(e.target.value)}
                   onKeyDown={(e) => {
-                    updateAlbumState(e, album.id, index);
+                    updateAlbumState(e, album.id);
                   }}
                 />
               ) : (
